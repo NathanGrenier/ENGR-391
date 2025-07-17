@@ -34,10 +34,6 @@ function [root, iter] = newton(f, x0, tol, max_iter)
         x_new = x - f(x) / df_approx;
         iter = iter + 1;
 
-                disp(iter);
-        disp(x_new);
-        printf("\n");
-
         % Check convergence
         if abs(x_new - x) < tol
             root = x_new;

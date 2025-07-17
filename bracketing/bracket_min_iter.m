@@ -1,4 +1,4 @@
-% Calculate the number of iterations needed for bisection method
+% Calculate the number of iterations needed for bracketed methods
 % Inputs:
 %   a0, b0 - initial interval endpoints
 %   TOL    - desired tolerance
