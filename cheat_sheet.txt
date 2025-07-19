@@ -1,0 +1,9 @@
+# Commands
+## System of Linear Equations
+- `cond(A, inf)`: Computes the conditioning number for a system of linear
+equations. The result refers to the maximum Error Magnification Factor `M`.
+- `norm(A, inf)`: Calculates the norm of a vector or matrix.
+- `A\B`: Solves a SOLE using the PA=LU decomposition method. NOTE: This includes
+a relative error of ~10^-16.
+- `[L, U, P] = lu(A)`: Performs the PA=LU decomposition. Returns the
+Permutation, Upper, and Lower matrices.
