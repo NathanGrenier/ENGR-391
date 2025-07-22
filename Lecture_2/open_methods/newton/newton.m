@@ -1,5 +1,5 @@
 % Inputs:
-%   f        - function handle for f(x) whose root is to be found
+%   f        - function handle for f(x) such that f(x) = 0
 %   x0       - initial guess for the root
 %   tol      - tolerance for convergence
 %   max_iter - maximum number of iterations allowed
