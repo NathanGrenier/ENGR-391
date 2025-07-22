@@ -1,41 +1,38 @@
+% Function to find the root of a nonlinear function using the fixed-point method
+% and plot the approximated root's value at each iteration, stopping early if
+% approximations become non-finite.
+%
 % Inputs:
-%   f        - function handle for f(x) whose root is to be found
+%   g        - function handle for g(x) such that x = g(x) at the root
 %   x0       - initial guess for the root
 %   tol      - tolerance for convergence
 %   max_iter - maximum number of iterations allowed
+%
 % Outputs:
 %   root     - approximate root of the equation
 %   iter     - number of iterations performed
 %   approximations - vector of approximations at each iteration
-function [root, iter, approximations] = newton(f, x0, tol, max_iter)
+%
+% Example usage:
+%   Find the fixed point of g(x) = cos(x)
+%   g = @(x) cos(x);
+%   [root, iter, approximations] = fixed_point(g, 0.5, 1e-6, 100);
+function [root, iter, approximations] = fixed_point(g, x0, tol, max_iter)
     % Set default maximum iterations if not provided
     if nargin < 4 || isempty(max_iter)
         max_iter = 1000;
     end
 
     % Initialize variables
+    iter = 0;
     x = x0;
-    eps = 2.22e-16;  % Machine epsilon in Octave
     approximations = x0;  % Start with initial guess
     converged = false;
 
-    % Perform Newton’s method iterations
-    for iter = 1:max_iter
-        % Compute step size h for derivative approximation
-        h = (eps)^(1/3) * max(abs(x), 1);
-
-        % Compute approximate derivative using central difference
-        f_values = [f(x - h), f(x + h)];
-        df_approx = diff(f_values) / (2 * h);  % Returns [f(x + h) - f(x - h)] / (2*h)
-        df_approx = df_approx(1);              % Extract scalar value
-
-        % Check for zero derivative
-        if df_approx == 0
-            error('Approximate derivative is zero. Newton method fails.');
-        end
-
-        % Newton iteration
-        x_new = x - f(x) / df_approx;
+    % Perform fixed-point iterations
+    while iter < max_iter
+        iter = iter + 1;
+        x_new = g(x);
 
         % Check if the new approximation is finite
         if ~isfinite(x_new)
@@ -43,18 +40,18 @@ function [root, iter, approximations] = newton(f, x0, tol, max_iter)
             break;
         end
 
+        % Store the finite approximation
         approximations = [approximations; x_new];
 
-        % Check convergence
+        % Check for convergence
         if abs(x_new - x) < tol
             converged = true;
             break;
         end
-
         x = x_new;
     end
 
-    % Set root to the last approximation
+    % Set the root to the last approximation
     root = approximations(end);
 
     % Warn if maximum iterations reached without convergence
@@ -75,6 +72,6 @@ function [root, iter, approximations] = newton(f, x0, tol, max_iter)
     plot(0:length(plot_range)-1, approximations(plot_range), '-o');
     xlabel('Iteration');
     ylabel('Approximation (x_r)');
-    title('Convergence of Newton''s Method');
+    title('Convergence of Fixed-Point Method');
     grid on;
 end
