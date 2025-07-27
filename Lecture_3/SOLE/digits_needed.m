@@ -1,6 +1,6 @@
 % Inputs:
-%   A        - Input matrix
-%   x0       - Desired precision
+%   A               - Input matrix
+%   precision       - Desired precision
 % Outputs:
 %   digits   - number of digits needed for certain percision after round-off
 %              errors are considered.
