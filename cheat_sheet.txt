@@ -7,3 +7,6 @@ equations. The result refers to the maximum Error Magnification Factor `M`.
 a relative error of ~10^-16.
 - `[L, U, P] = lu(A)`: Performs the PA=LU decomposition. Returns the
 Permutation, Upper, and Lower matrices.
+
+## ODE
+- `quiver(t, y, u, v)`: Plots the slop field.
